@@ -1,30 +1,35 @@
-param Input {1..P, 1..N};
-param Target_output {1..P};
+reset;
+param n := 4;
+param m := 10; #D
+param C := 100;
 
-# The code below presents my very basical idea that need to be discussed this Thursday
-
-#var weights{1..10} >= -1000;
-var w{1..n}
-
-param v,e,y
-
-/*approach 1 (just present my idea)*/
-minimize Cost:
-# sum{j in 1..P}(((1 / (1 + exp(sum{k in 1..I}(-weights[k+N*I]*(1/(1+exp(-sum{i in 1..N} weights[i+N*(k-1)] * (1 / (1+exp(-Input[j,i]))) )))) ))) - Target_output[j])^2);
-
-#sqrt(wTw)/2
-
-/*ve^Ty*/ + sqrt(sum{i in 1..n}w[i]^2)/2
-
-subject to condition1{i in 1..n}:
-y >= 0
-/*D(Aw - eR) + y >= eye*/
+set POINTS := {1..n};
+set INPUT_POINTS := {1..n};
+set DATASET := {1..m};
 
 
 
-/*approach 2 (just present my idea)*/
-minimize Cost:
-1/sqrt(wTw)
+param x{DATASET,INPUT_POINTS};
+param y{DATASET};
+data datasvm.dat;
 
-subject to condition1{i in 1..n}:
-y[i]*(w[i]x[i]+b) >= 1
+
+#Setting the value of y: 1 if digit is 3 and -1 for 6
+#for {i in DATASET} {
+
+#	if x[i,1] = 3 then {let y[i] := 1} else{ let y[i] := -1};
+
+#}
+
+var w{POINTS};	
+var b;
+var eta{DATASET} >= 0;
+
+minimize SVM : 0.5* sum{j in POINTS} (w[j]*w[j])+(C*sum {i in DATASET} eta[i]);
+
+s.t. CONDITION {i in DATASET}: y[i]*( (sum {j in POINTS} (x[i,j]*w[j]))-b) >= 1-eta[i];
+
+
+solve;
+#printf {i in POINTS} "%f\n", w[i] >> output.txt;
+#display b;
