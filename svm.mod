@@ -1,14 +1,15 @@
 reset;
 param n := 4;
 param m := 100; #D
-param C := 0; # todo
+param C := 1;
 
 set POINTS := {1..n};
+set INPUT_POINTS := {1..n};
 set DATASET := {1..m};
 
 
 
-param x{DATASET,POINTS};
+param x{DATASET,INPUT_POINTS};
 param y{DATASET};
 data datasvm2withoutStar.dat;
 #data datasvm.dat
@@ -31,4 +32,5 @@ s.t. CONDITION {i in DATASET}: y[i]*( (sum {j in POINTS} (x[i,j]*w[j]))-b) >= 1-
 
 solve;
 #printf {i in POINTS} "%f\n", w[i] >> output.txt;
-#display b;
+display b;
+display w;

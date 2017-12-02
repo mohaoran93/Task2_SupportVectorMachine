@@ -22,26 +22,31 @@ let correct := 0; let wrong := 0;
 
 #let total_hits :=0; let total_misses:=0;
 
-#Checking number of misses for digit 3
+#Checking number of -1
 for {i in {1..mtest}} {
 
 	#Finding where the point is placed on the hyperplane
 	let test[i] := sum {j in POINTS} (x_test[i,j]*w[j]) - b;
-	if (test[i] >= 0) then 
+	if (test[i] >= 0 && y_test[i] == 1) then 
 	{
-		let y_test[i] := 1; 
+		#let y_test[i] := 1; 
 		let correct := correct+1
 	} 
+	else if (test[i] < 0 && y_test[i] == -1) then
+	{
+		#let y_test[i] := 1; 
+		let correct := correct+1 
+	}
 	else 
 	{
-		let y_test[i] := -1; 
+		#let y_test[i] := -1; 
 		let wrong := wrong+1
 	};
 };
 
 
 
-display y_test;
+display test;
 		
 display correct; 
 display wrong;
