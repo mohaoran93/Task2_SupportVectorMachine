@@ -1,18 +1,17 @@
 reset;
 param n := 4;
-param m := 10; #D
-param C := 100;
+param m := 100; #D
+param C := 0; # todo
 
 set POINTS := {1..n};
-set INPUT_POINTS := {1..n};
 set DATASET := {1..m};
 
 
 
-param x{DATASET,INPUT_POINTS};
+param x{DATASET,POINTS};
 param y{DATASET};
-data datasvm.dat;
-
+data datasvm2withoutStar.dat;
+#data datasvm.dat
 
 #Setting the value of y: 1 if digit is 3 and -1 for 6
 #for {i in DATASET} {
