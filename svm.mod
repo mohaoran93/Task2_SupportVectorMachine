@@ -31,6 +31,6 @@ s.t. CONDITION {i in DATASET}: y[i]*( (sum {j in POINTS} (x[i,j]*w[j]))-b) >= 1-
 
 
 solve;
-#printf {i in POINTS} "%f\n", w[i] >> output.txt;
+
 display b;
 display w;

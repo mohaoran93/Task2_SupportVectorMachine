@@ -26,7 +26,7 @@ let correct := 0; let wrong := 0;
 for {i in {1..mtest}} {
 
 	#Finding where the point is placed on the hyperplane
-	let test[i] := sum {j in POINTS} (x_test[i,j]*w[j]);
+	let test[i] := sum {j in POINTS} (x_test[i,j]*w[j]) + CONDITION;
 	if (test[i] >= 0 && y_test[i] == 1) then 
 	{
 		#let y_test[i] := 1; 
