@@ -1,0 +1,3 @@
+reset;
+include svm_dual.mod
+#include svm_dual_test.mod

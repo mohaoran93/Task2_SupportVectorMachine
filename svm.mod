@@ -1,6 +1,6 @@
 reset;
 param n := 4;
-param m := 100; #D
+param m := 79; #D
 param C := 1;
 
 set POINTS := {1..n};
@@ -11,7 +11,7 @@ set DATASET := {1..m};
 
 param x{DATASET,INPUT_POINTS};
 param y{DATASET};
-data datasvm2withoutStar.dat;
+data data_train.dat;
 #data datasvm.dat
 
 #Setting the value of y: 1 if digit is 3 and -1 for 6
