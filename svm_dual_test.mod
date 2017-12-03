@@ -1,4 +1,4 @@
-param mtest := 50; #D
+param mtest := 20; #D
 
 set INPUT_POINTStest := {1..n};
 set DATASETtest := {1..mtest};
@@ -16,7 +16,7 @@ param wrong;
 #param total_miss;
 
 
-data datasvm2withoutStarTest.dat;
+data data_test.dat;
 
 let correct := 0; let wrong := 0;
 
@@ -26,7 +26,7 @@ let correct := 0; let wrong := 0;
 for {i in {1..mtest}} {
 
 	#Finding where the point is placed on the hyperplane
-	let test[i] := sum {j in POINTS} (x_test[i,j]*w[j]) - b;
+	let test[i] := sum {j in POINTS} (x_test[i,j]*w[j]);
 	if (test[i] >= 0 && y_test[i] == 1) then 
 	{
 		#let y_test[i] := 1; 
